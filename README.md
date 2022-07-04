@@ -3,6 +3,10 @@ Creation of a message Gateaway with Kafka for an hospital.
 Explanation of chosen topic in 
 'Heath EDA.ipynb'. 
 
+Video Demo : https://www.youtube.com/watch?v=mxIbyMutzSI
+
+### Tutorial : 
+
 ## DOCKER 
 
 ### Creating the cluster : 
