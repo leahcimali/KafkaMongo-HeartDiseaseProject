@@ -1,5 +1,7 @@
 # KafkaMongo-HeartDiseaseProject
-Creation of a message Gateaway with Kafka for an hospital
+Creation of a message Gateaway with Kafka for an hospital.
+Explanation of chosen topic in 
+'Heath EDA.ipynb'. 
 
 ## DOCKER 
 
