@@ -64,6 +64,7 @@ connect to kafka container :
 
 `sudo docker exec -it kafka bash
 `
+
 To create the topics : 
 
 `/usr/bin/kafka-topics --create --topic MaladeUrgence --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
