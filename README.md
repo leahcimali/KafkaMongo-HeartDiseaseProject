@@ -32,10 +32,12 @@ Kafka :
 
 `sudo docker exec -it kafka bash
 `
+
 Mongo : 
 
 `sudo docker exec -it mongo bash
 `
+
 Connect : 
 
 `sudo docker exec -it connect bash
@@ -62,10 +64,14 @@ connect to kafka container :
 
 `sudo docker exec -it kafka bash
 `
+To create the topics : 
+
 `/usr/bin/kafka-topics --create --topic MaladeUrgence --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
 `
+
 `/usr/bin/kafka-topics --create --topic NonMaladeSurveillance --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
 `
+
 `/usr/bin/kafka-topics --create --topic NonMalade --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
 `
 ## MONGO DATABASE
@@ -118,7 +124,8 @@ Continue -> Launch -> The connector is created !
 
 sudo docker exec -it connect bash
 
-`curl -X POST -H "Content-Type: application/json" --data '
+```
+curl -X POST -H "Content-Type: application/json" --data '
   {"name": "UrgenceConnector",
    "config": {
      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
@@ -131,7 +138,8 @@ sudo docker exec -it connect bash
      "key.converter.schemas.enable":false,
      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
      "value.converter.schemas.enable":false
- }}' http://localhost:8083/connectors -w "\n"`
+ }}' http://localhost:8083/connectors -w "\n"
+ ```
 
 ## CONNECTING TO TOPICS : 
 
