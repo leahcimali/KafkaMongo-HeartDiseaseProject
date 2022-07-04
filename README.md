@@ -82,20 +82,27 @@ connect to mongodb container :
 `sudo docker exec -it mongo bash
 
 `
-connect to mongo as root user
+Connect to mongo as root user :
 
 `mongo --host localhost -u root -p root
 `
+
 Create Database Hopital and a collection MaladeUrgence : 
+
 
 `use Hospital
 `
+
 `db.createCollection(‘MaladeUrgence’)
 `
+
+
 The collection is empty, see with : 
+
 
 `db.MaladeUrgence.find()
 `
+
 ## MONGO SINK CONNECTOR CONFIGURATION
 
 ## WITH CONTROL-CENTER API
