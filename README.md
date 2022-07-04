@@ -24,7 +24,7 @@ sudo docker exec -it connect bash
 
 http://localhost:9021/
 
-### Creation and configuration of Topic and connector can be done with concrol-center API or Manualy
+### Creation and configuration of Topics and connectors can be done with control-center API or Manualy.
 
 ## TOPIC CREATION
 
