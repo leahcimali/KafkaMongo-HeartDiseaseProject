@@ -13,22 +13,22 @@ Link to Answers to project questions: https://docs.google.com/document/d/1G1L64X
 ## DOCKER 
 
 ### Creating the cluster : 
-sudo docker-compose up --build -d 
-
+`sudo docker-compose up --build -d 
+`
 ### Connecting to containers :
 
 Kafka : 
 
-sudo docker exec -it kafka bash
-
+`sudo docker exec -it kafka bash
+`
 Mongo : 
 
-sudo docker exec -it mongo bash
-
+`sudo docker exec -it mongo bash
+`
 Connect : 
 
-sudo docker exec -it connect bash
-
+`sudo docker exec -it connect bash
+`
 ### To use the control-center API :
 
 http://localhost:9021/
@@ -47,34 +47,37 @@ Here we are creating 3 topics :
 
 ## MANUALLY 
 
-connect to kafka container : sudo docker exec -it kafka bash
+connect to kafka container : 
 
-/usr/bin/kafka-topics --create --topic MaladeUrgence --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
-
-/usr/bin/kafka-topics --create --topic NonMaladeSurveillance --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
-
-/usr/bin/kafka-topics --create --topic NonMalade --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
-
+`sudo docker exec -it kafka bash
+`
+`/usr/bin/kafka-topics --create --topic MaladeUrgence --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
+`
+`/usr/bin/kafka-topics --create --topic NonMaladeSurveillance --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
+`
+`/usr/bin/kafka-topics --create --topic NonMalade --bootstrap-server localhost:9092 --partitions 2 --replication-factor 1
+`
 ## MONGO DATABASE
 
-connect to mongodb container
+connect to mongodb container : 
 
-sudo docker exec -it mongo bash
+`sudo docker exec -it mongo bash
 
+`
 connect to mongo as root user
 
-mongo --host localhost -u root -p root
-
+`mongo --host localhost -u root -p root
+`
 Create Database Hopital and a collection MaladeUrgence : 
 
-use Hospital
-
-db.createCollection(‘MaladeUrgence’)
-
+`use Hospital
+`
+`db.createCollection(‘MaladeUrgence’)
+`
 The collection is empty, see with : 
 
-db.MaladeUrgence.find()
-
+`db.MaladeUrgence.find()
+`
 ## MONGO SINK CONNECTOR CONFIGURATION
 
 ## WITH CONTROL-CENTER API
@@ -104,7 +107,7 @@ Continue -> Launch -> The connector is created !
 
 sudo docker exec -it connect bash
 
-curl -X POST -H "Content-Type: application/json" --data '
+`curl -X POST -H "Content-Type: application/json" --data '
   {"name": "UrgenceConnector",
    "config": {
      "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector",
@@ -117,17 +120,17 @@ curl -X POST -H "Content-Type: application/json" --data '
      "key.converter.schemas.enable":false,
      "value.converter":"org.apache.kafka.connect.storage.StringConverter",
      "value.converter.schemas.enable":false
- }}' http://localhost:8083/connectors -w "\n"
+ }}' http://localhost:8083/connectors -w "\n"`
 
 ## CONNECTING TO TOPICS : 
 
 On 3 separate shell connect to kafka then : 
 
-Shell 1 : /usr/bin/kafka-console-producer --topic MaladeUrgence --broker-list localhost:9092
+Shell 1 :` /usr/bin/kafka-console-producer --topic MaladeUrgence --broker-list localhost:9092`
 
-Shell 2: /usr/bin/kafka-console-producer --topic NonMaladeSurveillance --broker-list localhost:9092
+Shell 2: `/usr/bin/kafka-console-producer --topic NonMaladeSurveillance --broker-list localhost:9092`
 
-Shell 3 : /usr/bin/kafka-console-producer --topic NonMalade --broker-list localhost:9092
+Shell 3 : `/usr/bin/kafka-console-producer --topic NonMalade --broker-list localhost:9092`
 
 Don't shut those, we have to wait for the producer to produce message! 
 
@@ -145,8 +148,8 @@ The producer was create with python-Kafka on jupyter notebook.
 
 You can manually write message on kafka with:
 
-/usr/bin/kafka-console-producer --topic <topic-name> --broker-list localhost:9092
-
+`/usr/bin/kafka-console-producer --topic <topic-name> --broker-list localhost:9092
+`
 <topic-name> is the name of the topic without brackets
 
 The python producer : 
@@ -158,12 +161,12 @@ Veryfiying the database :
 
 connect to mongo as root user
 
-mongo --host localhost -u root -p root
-
+`mongo --host localhost -u root -p root
+`
 use Hospital
 
-db.MaladeUrgence.find()
-
+`db.MaladeUrgence.find()
+`
 Entries have been created in the database ! 
 GG ! Great job! 
 
@@ -172,7 +175,7 @@ GG ! Great job!
 Users aside the database administrator shouldn't have write or update access to the database.
 We are creating a read only user: 
 
-db.createUser(
+`db.createUser(
 {
 user: "doctor1",
 pwd: "doctor",
@@ -183,16 +186,16 @@ db: "Hopital"
 }
 ]
 }
-)
+)`
 
 Even for the database administrator, it should not be easy to freely delete data, this access should be reserve to the root user which will be use only when needed. Least privilege access is always a good practice in database administration. 
 
 We create a HopitalAdmnistrator Role that can read; update and write in database but cannot delete entries. 
 
 And we create a admin user associate to this entity.
-
+`
 db.createRole(
-   {
+`   {
      role: "HopitalAdministrator", 
      privileges: [
        {
@@ -204,9 +207,9 @@ db.createRole(
      ],
      roles: []
    }
-)
-
-
+)`
+`
+`
 db.createUser(
 {
 user: "admin1",
@@ -216,3 +219,4 @@ roles: [
 role: "HopitalAdministrator", db: "Hopital"
 },
 )
+`
