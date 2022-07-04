@@ -8,7 +8,18 @@ Video Demo : https://www.youtube.com/watch?v=mxIbyMutzSI
 
 Link to Answers to project questions: https://docs.google.com/document/d/1G1L64XvYgUH9FvcaLnUVnGDb_ZeiOB2pmNKp6U3pv14/edit?usp=sharing
 
-### Tutorial : 
+# Project Files Overview : 
+
+docker-compose.yml & Docker File : Use to build the cluster 
+
+Heath EDA.ipynb : Exploratory Data Analysis to decide the filter for the message broker.
+
+heart.csv ; Fichier CSV du dataset from Kaggle : https://www.kaggle.com/datasets/zhaoyingzhu/heartcsv?
+
+Producer.ipynb : Code du producer sous python.
+
+Consumer Surveillance.ipynb, Consumer Malade.ipynb : Code de consumer.
+# Tutorial : 
 
 ## DOCKER 
 
@@ -148,9 +159,10 @@ The producer was create with python-Kafka on jupyter notebook.
 
 You can manually write message on kafka with:
 
-`/usr/bin/kafka-console-producer --topic <topic-name> --broker-list localhost:9092
+`/usr/bin/kafka-console-producer --topic topic-name --broker-list localhost:9092
 `
-<topic-name> is the name of the topic without brackets
+
+topic-name is the name of the topic without brackets
 
 The python producer : 
 Producer.ipynb
@@ -161,12 +173,18 @@ Veryfiying the database :
 
 connect to mongo as root user
 
-`mongo --host localhost -u root -p root
 `
-use Hospital
+mongo --host localhost -u root -p root
+`
 
-`db.MaladeUrgence.find()
 `
+use Hospital 
+`
+
+`
+db.MaladeUrgence.find()
+`
+
 Entries have been created in the database ! 
 GG ! Great job! 
 
@@ -175,7 +193,8 @@ GG ! Great job!
 Users aside the database administrator shouldn't have write or update access to the database.
 We are creating a read only user: 
 
-`db.createUser(
+```
+db.createUser(
 {
 user: "doctor1",
 pwd: "doctor",
@@ -187,13 +206,15 @@ db: "Hopital"
 ]
 }
 )`
+```
 
 Even for the database administrator, it should not be easy to freely delete data, this access should be reserve to the root user which will be use only when needed. Least privilege access is always a good practice in database administration. 
 
 We create a HopitalAdmnistrator Role that can read; update and write in database but cannot delete entries. 
 
 And we create a admin user associate to this entity.
-`
+
+```
 db.createRole(
 `   {
      role: "HopitalAdministrator", 
@@ -207,9 +228,10 @@ db.createRole(
      ],
      roles: []
    }
-)`
-`
-`
+)
+```
+
+```
 db.createUser(
 {
 user: "admin1",
@@ -219,4 +241,18 @@ roles: [
 role: "HopitalAdministrator", db: "Hopital"
 },
 )
-`
+```
+
+
+# Référence
+
+https://www.ijrte.org/wp-content/uploads/papers/v8i2S3/B11630782S319.pdf
+
+https://www.mongodb.com/docs/kafka-connector/current/
+
+https://kafka.apache.org/documentation/#:~:text=Producers%20are%20those%20client%20applications,read%20and%20process)%20these%20events.
+
+https://kafka-python.readthedocs.io/en/master/
+
+https://www.mongodb.com/docs/manual/core/authorization/#:~:text=MongoDB%20employs%20Role%2DBased%20Access,no%20access%20to%20the%20system.
+
