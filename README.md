@@ -6,6 +6,8 @@ Explanation of chosen topic in
 
 Video Demo : https://www.youtube.com/watch?v=mxIbyMutzSI
 
+Link to Answers to project questions: https://docs.google.com/document/d/1G1L64XvYgUH9FvcaLnUVnGDb_ZeiOB2pmNKp6U3pv14/edit?usp=sharing
+
 ### Tutorial : 
 
 ## DOCKER 
@@ -165,3 +167,52 @@ db.MaladeUrgence.find()
 Entries have been created in the database ! 
 GG ! Great job! 
 
+### BONUS : MANAGING MONGODB ACCESS.
+
+Users aside the database administrator shouldn't have write or update access to the database.
+We are creating a read only user: 
+
+db.createUser(
+{
+user: "doctor1",
+pwd: "doctor",
+roles: [
+{
+role: "read",
+db: "Hopital"
+}
+]
+}
+)
+
+Even for the database administrator, it should not be easy to freely delete data, this access should be reserve to the root user which will be use only when needed. Least privilege access is always a good practice in database administration. 
+
+We create a HopitalAdmnistrator Role that can read; update and write in database but cannot delete entries. 
+
+And we create a admin user associate to this entity.
+
+db.createRole(
+   {
+     role: "HopitalAdministrator", 
+     privileges: [
+       {
+          resource: {
+            role: 'readWrite',
+            db: 'Hopital'
+          }, actions: ["find","update","insert"]
+        }
+     ],
+     roles: []
+   }
+)
+
+
+db.createUser(
+{
+user: "admin1",
+pwd: "admin12345",
+roles: [
+{
+role: "HopitalAdministrator", db: "Hopital"
+},
+)
