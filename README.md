@@ -3,10 +3,10 @@ Creation of a message Gateaway with Kafka for an hospital
 
 ## DOCKER 
 
-# Creating the cluster : 
+### Creating the cluster : 
 sudo docker-compose up --build -d 
 
-# Connecting to containers :
+### Connecting to containers :
 
 Kafka : 
 
@@ -20,11 +20,11 @@ Connect :
 
 sudo docker exec -it connect bash
 
-# To use the control-center API :
+### To use the control-center API :
 
 http://localhost:9021/
 
-# Creation and configuration of Topic and connector can be done with concrol-center API or Manualy
+### Creation and configuration of Topic and connector can be done with concrol-center API or Manualy
 
 ## TOPIC CREATION
 
