@@ -264,3 +264,29 @@ https://kafka-python.readthedocs.io/en/master/
 
 https://www.mongodb.com/docs/manual/core/authorization/#:~:text=MongoDB%20employs%20Role%2DBased%20Access,no%20access%20to%20the%20system.
 
+# To go Further ...
+To go further, we can use machine learning algorithm.
+
+For exemple, using logistic regression will help us determine if our patient is sick or not.
+
+In our use case, we can use a logistic regression on a part of the data and deploy the model on our producer to determine if using the data (aside the target value) if our non-sick patient is predict as sick with the model. Those patient should go to the NonMaladeSurveillance topic.
+
+Of course our model should be trained on a portion of the dataset and deployed on another. 
+
+Here the dataset is too small for a good model. 
+
+In a real environment. 
+
+We will start with a manual filter like we did to classify streaming data.
+
+Those data will be stored in a database. 
+
+Those batch data will be used to train and test a model. 
+
+The model will be deploy in the producer for better performance. 
+
+Data will continue to be provided in stream. 
+
+After a while, new batch data should update the model. 
+
+And this cicle continue ...
