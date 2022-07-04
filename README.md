@@ -14,11 +14,11 @@ docker-compose.yml & Docker File : Use to build the cluster
 
 Heath EDA.ipynb : Exploratory Data Analysis to decide the filter for the message broker.
 
-heart.csv ; Fichier CSV du dataset from Kaggle : https://www.kaggle.com/datasets/zhaoyingzhu/heartcsv?
+heart.csv : CSV file from Kaggle : https://www.kaggle.com/datasets/zhaoyingzhu/heartcsv?
 
-Producer.ipynb : Code du producer sous python.
+Producer.ipynb : Producer code with python.
 
-Consumer Surveillance.ipynb, Consumer Malade.ipynb : Code de consumer.
+Consumer Surveillance.ipynb, Consumer Malade.ipynb : Consumer code.
 # Tutorial : 
 
 ## DOCKER 
